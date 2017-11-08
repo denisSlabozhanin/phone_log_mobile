@@ -1,0 +1,3 @@
+rootProject.name = 'phone_log_mobile'
+
+include ':app'
