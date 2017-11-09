@@ -1,3 +1,9 @@
 {
-  "presets": ["react-native"]
+  "presets": ["react-native"],
+  "plugins": [
+    ["react-intl", {
+      "messagesDir": "/home/bifros/WebstormProjects/phone_log_mobile/src/i18n/messages/",
+      "enforceDescriptions": false
+    }]
+  ]
 }
