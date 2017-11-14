@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
 
-export const Icon = styled.Text`
-  color: #fff;
+export const Padded = styled.View`
+  padding-left: 15;
 `;

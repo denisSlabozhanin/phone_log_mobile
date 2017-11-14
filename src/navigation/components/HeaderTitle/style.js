@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 
 export const TitleContainer = styled.View`
   alignSelf: center;
+  flex-direction: row;
 `;
 
 export const TitleText = styled.Text`

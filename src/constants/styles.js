@@ -19,7 +19,7 @@ export default {
   },
   defaultHeader: {
     style: {
-      backgroundColor: '#222426',
+      backgroundColor: '#282A2D',
     },
     title: {
       color: '#ffffff',

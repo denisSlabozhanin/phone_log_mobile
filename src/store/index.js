@@ -1,27 +1,27 @@
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
-import { offline } from '@redux-offline/redux-offline';
-import defaultConfig  from '@redux-offline/redux-offline/lib/defaults';
-/*import axios from 'axios';*/
-/*import axiosMiddleware from 'redux-axios-middleware';*/
+import { persistStore, autoRehydrate } from 'redux-persist';
+import { AsyncStorage } from 'react-native';
 import { reducer as form } from 'redux-form';
-import ReduxThunk from 'redux-thunk';
-import { createLogger } from 'redux-logger';
+import prepareStore from './prepareStore';
 import nav from '../navigation/reducer';
 import phonelogs from './reducers/phonelogs';
 
-const reducers = combineReducers({
+const ReduxPersist = {
+  active: true,
+  reducerVersion: '6',
+  storeConfig: {
+    storage: AsyncStorage,
+    whitelist: ['nav', 'form', 'phonelogs'],
+  },
+};
+
+const store = prepareStore({
   nav,
+  form,
   phonelogs,
+  autoRehydrate,
 });
 
-const appliedMaiddleware = applyMiddleware(
-  createLogger(),
-  ReduxThunk,
-);
-
-const store = createStore(
-  reducers,
-  appliedMaiddleware,
-);
+const config = ReduxPersist.storeConfig;
+persistStore(store, config);
 
 export default store;

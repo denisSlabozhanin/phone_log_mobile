@@ -22,23 +22,37 @@ class RadioBtn extends Component {
     this.props.onCheck();
   }
 
-  render() {
-    const {
-      label,
-      containerStyle,
-      labelStyle,
-    } = this.props;
+  renderByPriority(priority) {
+    const { labelCmp } = this.props;
+    return priority === 'label radio'
+      ? [
+        labelCmp,
+        this.renderRadio(),
+      ]
+      : [
+        this.renderRadio(),
+        labelCmp,
+      ];
+  }
+
+  renderRadio() {
     return (
-      <Touchable onPress={() => this.onCheck()} style={containerStyle}>
-        <ContentHolder>
-          <Label style={labelStyle}>{label}</Label>
-          <OuterCircle>
-            <InnerCircle
-              style={{
-                opacity: this.state.checked ? 1 : 0,
-              }}
-            />
-          </OuterCircle>
+      <OuterCircle style={this.props.radioStyles}>
+        <InnerCircle
+          style={{
+            opacity: this.state.checked ? 1 : 0,
+          }}
+        />
+      </OuterCircle>
+    );
+  }
+
+  render() {
+    const { style, priority } = this.props;
+    return (
+      <Touchable onPress={() => this.onCheck()}>
+        <ContentHolder style={style}>
+          {this.renderByPriority(priority)}
         </ContentHolder>
       </Touchable>
     );
@@ -46,17 +60,17 @@ class RadioBtn extends Component {
 }
 
 RadioBtn.propTypes = {
+  priority: PropTypes.string.isRequired,
   checked: PropTypes.bool.isRequired,
   onCheck: PropTypes.func.isRequired,
-  label: PropTypes.string,
-  containerStyle: PropTypes.object,
-  labelStyle: PropTypes.object,
+  labelCmp: PropTypes.node,
+  radioStyles: PropTypes.object,
+  style: PropTypes.object,
 };
 
 RadioBtn.defaultProps = {
-  label: '',
-  containerStyle: {},
-  labelStyle: {},
+  style: {},
+  radioStyles: {},
 };
 
 export default RadioBtn;

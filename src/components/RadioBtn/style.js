@@ -23,7 +23,7 @@ export const InnerCircle = styled.View`
   height: 14;
   width: 14;
   background-color: #2489C8;
-  border-radius: 10;
+  border-radius: 20;
 `;
 
 export const Label = styled.Text`

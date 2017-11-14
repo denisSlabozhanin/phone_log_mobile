@@ -14,7 +14,7 @@ const layout = {
     width,
     height,
   },
-  contentHeight: height - actionBarHeight - topBarHeight,
+  contentHeight: height - (actionBarHeight + topBarHeight),
   majorDimension: width > height ? width : height,
   minorDimension: width < height ? width : height,
 };

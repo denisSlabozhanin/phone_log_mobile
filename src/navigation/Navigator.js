@@ -1,14 +1,14 @@
 /* eslint new-cap: 0 */
 import React from 'react';
 import { StackNavigator, TabNavigator } from 'react-navigation';
-import { APP_ROUTE } from '../constants/routes';
 import HeaderTitle from './components/HeaderTitle';
 import HeaderLeft from './components/HeaderLeft';
 import HeaderRight from './components/HeaderRight';
 import PhonelogsList from '../modules/phoneLogs/containers/PhonelogsList';
 import MainMenu from '../modules/phoneLogs/containers/MainMenu';
-import FiltersMenu from '../modules/phoneLogs/containers/FiltersMenu';
+import FiltersMenu from '../modules/phoneLogs/containers/LabelsMenu';
 import styles from '../constants/styles';
+import UserSelect from '../modules/phoneLogs/containers/UserSelect';
 
 const applicationStatusBar = {
   contentComponent: <HeaderRight />,
@@ -41,6 +41,9 @@ const Phonelogs = {
     {
       Home: {
         screen: PhonelogsList,
+      },
+      UserSelect: {
+        screen: UserSelect,
       },
       MainMenu: {
         screen: MainMenu,

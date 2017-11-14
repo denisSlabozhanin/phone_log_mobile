@@ -19,11 +19,6 @@ export const OuterBox = styled.View`
   overflow: hidden;
 `;
 
-export const Inner = styled.Image`
-  height: 10;
-  width: 10;
-`;
-
 export const Label = styled.Text`
   font-size: 15;
   color: #000;

@@ -3,19 +3,21 @@ import layout from '../../constants/layout';
 
 export const BtnWrapper = layout.os === 'android'
   ? styled.TouchableNativeFeedback`
-      background-color: #2489C8;
-      padding-vertical: 10;
-      padding-horizontal: 20;
-      border-radius: 4;
     `
   : styled.TouchableWithoutFeedback`
-      background-color: #2489C8;
-      padding-vertical: 10;
-      padding-horizontal: 20;
-      border-radius: 4;
     `;
 
+export const BtnContent = styled.View`
+  background-color: #2489C8;
+  border-radius: 4;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const BtnLabel = styled.Text`
+  padding-vertical: 7;
+  padding-horizontal: 14;
   color: #fff;
-  font-size: 13;
+  font-size: 10;
 `;

@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  TouchableHighlight,
-} from 'react-native';
-import { Icon } from './style';
+import Icon from '../../../components/Icon';
 import { MAIN_MENU_ROUTE } from '../../../constants/routes';
+import { Touchable } from '../../../shared/styles';
+import { Padded } from './style';
 
 const navigate = (navigation) => {
   const currentRouteIndex = navigation.state.routes.length - 1;
@@ -17,9 +16,11 @@ const navigate = (navigation) => {
 };
 
 const HeaderLeft = ({ navigation }) => (
-  <TouchableHighlight onPress={() => navigate(navigation)}>
-    <Icon>{'Icon'}</Icon>
-  </TouchableHighlight>
+  <Touchable onPress={() => navigate(navigation)}>
+    <Padded>
+      <Icon name={'humburgerMenu'} />
+    </Padded>
+  </Touchable>
 );
 
 HeaderLeft.propTypes = {

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
   Touchable,
   OuterBox,
-  Inner,
   Label,
   ContentHolder,
 } from './style';
@@ -37,8 +36,8 @@ class CheckBox extends Component {
               backgroundColor: this.state.checked ? '#2489C8' : 'transparent',
             }}
           >
-            <Inner
-              source={require('../../assets/images/checked.png')}
+            <Icon
+              name={'checked'}
               style={{ opacity: this.state.checked ? 1 : 0 }}
             />
           </OuterBox>

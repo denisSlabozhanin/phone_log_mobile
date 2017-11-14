@@ -9,6 +9,9 @@ const phonelogsList = (state = [], action) => {
   switch (action.type) {
   case GET_PHONELOGS:
     return action.payload;
+  case 'persist/REHYDRATE': {
+    return action.payload.phonelogs.phonelogsList;
+  }
   default:
     return state;
   }
