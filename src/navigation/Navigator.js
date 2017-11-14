@@ -7,6 +7,7 @@ import HeaderLeft from './components/HeaderLeft';
 import HeaderRight from './components/HeaderRight';
 import PhonelogsList from '../modules/phoneLogs/containers/PhonelogsList';
 import MainMenu from '../modules/phoneLogs/containers/MainMenu';
+import FiltersMenu from '../modules/phoneLogs/containers/FiltersMenu';
 import styles from '../constants/styles';
 
 const applicationStatusBar = {
@@ -17,7 +18,7 @@ const applicationStatusBar = {
     headerTitle: <HeaderTitle />,
     headerTitleStyle: styles.defaultHeader.title,
     headerLeft: <HeaderLeft navigation={navigation} />,
-    headerRight: <HeaderRight />,
+    headerRight: <HeaderRight navigation={navigation} />,
   }),
 };
 
@@ -30,7 +31,7 @@ const tabOptions = {
 const stackOptions = {
   headerMode: 'none',
   cardStyle: {
-    backgroundColor: '#282A2D',
+    backgroundColor: 'transparent',
     opacity: 1,
   },
 };
@@ -43,6 +44,9 @@ const Phonelogs = {
       },
       MainMenu: {
         screen: MainMenu,
+      },
+      FiltersMenu: {
+        screen: FiltersMenu,
       },
     },
     {
@@ -60,16 +64,14 @@ const App = {
       ...applicationStatusBar,
     },
   ),
-  ...tabOptions,
 };
-
 
 export default TabNavigator(
   {
     App,
   },
   {
-    initialRouteName: APP_ROUTE,
+    ...tabOptions,
     swipeEnabled: false,
     animationEnabled: false,
     lazy: true,

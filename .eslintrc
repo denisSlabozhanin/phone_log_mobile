@@ -12,6 +12,7 @@
     "node": true
   },
   "rules": {
+    "linebreak-style": "off",
     "indent": [2, 2],
     "react/jsx-filename-extension": 0,
     "react/prefer-stateless-function": 0,

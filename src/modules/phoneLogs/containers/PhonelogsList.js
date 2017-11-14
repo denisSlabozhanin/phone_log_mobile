@@ -6,10 +6,13 @@ import Phonelogs from '../components/PhonelogsList/index';
 import PhonelogListItem from '../components/PhonelogsList/ListItem/PhonelogListItem';
 import PreloaderScreen from '../../../components/PreloaderScreen/index';
 import EmptyList from '../components/PhonelogsList/EmptyList';
+import {getPhoneLogs} from '../../../store/actionCreators/phonelogsActions';
 
 class PhonelogsList extends Component {
   componentWillMount() {
-    this.props.getPhoneLogs();
+    if (this.props.phonelogs.length === 0) {
+      this.props.getPhoneLogs();
+    }
   }
 
   renderPhonelogs() {
@@ -23,7 +26,7 @@ class PhonelogsList extends Component {
         <PhonelogListItem
           key={index}
           {...phonelog}
-        />,
+        />
       );
   }
 

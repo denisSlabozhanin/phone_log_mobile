@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import ActionBarCmp from '../components/ActionBar/index';
+import { FILTERS_MENU_ROUTE } from '../../../constants/routes';
 
 class ActionBar extends Component {
+  openFilters() {
+    const {
+      navigation,
+    } = this.props;
+
+    navigation.navigate(FILTERS_MENU_ROUTE);
+  }
+
   render() {
     return (
-      <View style={{ height: 40, backgroundColor: '#C4C7CC' }}>
-        <Text style={{
-          textAlign: 'center', color: '#000', marginTop: 12, fontSize: 11,
-        }}>Updated Now</Text>
-      </View>
+      <ActionBarCmp
+        openFilters={() => this.openFilters()}
+      />
     );
   }
 }

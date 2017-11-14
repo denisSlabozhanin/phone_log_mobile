@@ -1,5 +1,5 @@
 /* eslint no-console: 0 */
-import 'intl';
+
 import React from 'react';
 import { Provider } from 'react-redux';
 import RootNavigator from './src/navigation';

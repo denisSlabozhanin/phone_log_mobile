@@ -3,9 +3,14 @@ import {
   Text,
   TouchableHighlight,
 } from 'react-native';
+import { FILTERS_MENU_ROUTE } from '../../../constants/routes';
 
-const HeaderRight = () => (
-  <TouchableHighlight onPress={() => {}}>
+const navigate = (navigation) => {
+  navigation.navigate(FILTERS_MENU_ROUTE);
+};
+
+const HeaderRight = ({ navigation }) => (
+  <TouchableHighlight onPress={() => navigate(navigation)}>
     <Text style={{ color: '#fff' }}>{'Icon'}</Text>
   </TouchableHighlight>
 );

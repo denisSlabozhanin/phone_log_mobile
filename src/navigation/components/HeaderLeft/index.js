@@ -4,15 +4,15 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import { Icon } from './style';
-import { MAIN_MENU_ROUTE, HOME_ROUTE } from '../../../constants/routes';
+import { MAIN_MENU_ROUTE } from '../../../constants/routes';
 
 const navigate = (navigation) => {
   const currentRouteIndex = navigation.state.routes.length - 1;
   const currentRoute = navigation.state.routes[currentRouteIndex];
-  if (currentRoute.routeName === HOME_ROUTE) {
+  if (currentRoute.routeName !== MAIN_MENU_ROUTE) {
     navigation.navigate(MAIN_MENU_ROUTE);
   } else {
-    navigation.navigate(HOME_ROUTE);
+    navigation.navigate(navigation.state.routes[currentRouteIndex - 1].routeName);
   }
 };
 
