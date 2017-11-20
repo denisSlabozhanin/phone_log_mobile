@@ -1,0 +1,698 @@
+Index: src/modules/phoneLogs/components/UserSelect/User/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/modules/phoneLogs/components/UserSelect/User/index.js	(revision )
++++ src/modules/phoneLogs/components/UserSelect/User/index.js	(revision )
+@@ -0,0 +1,18 @@
++import React from 'react';
++import {
++  UserContainer,
++  UserPic,
++  UserName,
++} from './style';
++import UserThumb from '../../../../../components/UserThumb/index';
++
++const User = ({
++  name,
++}) => (
++  <UserContainer>
++    <UserThumb />
++    <UserName>{name}</UserName>
++  </UserContainer>
++);
++
++export default User;
+Index: src/modules/phoneLogs/containers/UserSelect.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/modules/phoneLogs/containers/UserSelect.js	(revision )
++++ src/modules/phoneLogs/containers/UserSelect.js	(revision )
+@@ -0,0 +1,85 @@
++import React, { Component } from 'react';
++import PropTypes from 'prop-types';
++import { connect } from 'react-redux';
++import * as actions from '../../../store/actionCreators/phonelogsActions';
++import UserSelectCmp from '../components/UserSelect';
++import User from '../components/UserSelect/User';
++import RadioBtn from '../../../components/RadioBtn';
++import EmptyList from '../components/PhonelogsList/EmptyList';
++
++class UserSelect extends Component {
++  componentWillMount() {
++    if (this.props.usersList.length === 0) {
++      this.props.getUsersList();
++    }
++  }
++
++  componentWillReceiveProps(nextProps) {
++    if (nextProps.usersList.length !== this.props.usersList.length) {
++      const users = nextProps.usersList.map(user => ({
++        ...user,
++        selected: false,
++      }));
++
++      this.setState({
++        users,
++      });
++    }
++  }
++
++  onUserSelect(user) {
++    user.selected = true;
++    this.setState({
++      users: [
++        ...this.state.users.map(storedUser =>
++          storedUser.userName === user.userName ? user : storedUser),
++      ],
++    });
++  }
++
++  renderUser({ userName }) {
++    return (
++      <User
++        name={userName}
++      />
++    );
++  }
++
++  renderUsers() {
++    const { usersList } = this.props;
++    return usersList.map((user, index) => (
++      <RadioBtn
++        key={index}
++        labelCmp={this.renderUser(user)}
++        priority={'label radio'}
++        checked={this.state.users[index].selected}
++        onCheck={() => this.onUserSelect(user)}
++        radioStyles={{ marginTop: 27, marginRight: 20 }}
++        style={{ borderBottomWidth: 1, borderBottomColor: '#eee' }}
++      />
++    ));
++  }
++
++  render() {
++    return this.props.usersList.length === 0
++      ? (
++        <EmptyList />
++      )
++      : (
++        <UserSelectCmp
++          renderUsers={() => this.renderUsers()}
++        />
++      );
++  }
++}
++
++UserSelect.propTypes = {
++  usersList: PropTypes.array.isRequired,
++  getUsersList: PropTypes.func.isRequired,
++};
++
++const mapStateToProps = ({ phonelogs }) => ({
++  usersList: phonelogs.usersList,
++});
++
++export default connect(mapStateToProps, actions)(UserSelect);
+Index: src/store/prepareStore.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/store/prepareStore.js	(revision )
++++ src/store/prepareStore.js	(revision )
+@@ -0,0 +1,33 @@
++import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
++import { composeWithDevTools } from 'remote-redux-devtools';
++import ReduxThunk from 'redux-thunk';
++import logger from 'redux-logger';
++
++const prepareStore = (reducers, isDev = true) => {
++  const middlewares = [ReduxThunk];
++
++  if (isDev) {
++    middlewares.push(logger);
++  }
++
++  const middle = applyMiddleware(...middlewares);
++
++  const composeEnhancers = composeWithDevTools({
++    realtime: true,
++  });
++
++  const rootReducer = combineReducers({
++    ...reducers,
++  });
++
++  const configureStore = initialState =>
++    createStore(
++      rootReducer,
++      initialState,
++      isDev ? composeEnhancers(middle) : compose(middle),
++    );
++
++  return configureStore();
++};
++
++export default prepareStore;
+Index: src/modules/phoneLogs/components/LabelsMenu/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/modules/phoneLogs/components/LabelsMenu/index.js	(revision )
++++ src/modules/phoneLogs/components/LabelsMenu/index.js	(revision )
+@@ -0,0 +1,56 @@
++import React from 'react';
++import {
++  ModalWrapper,
++  ModalBackground,
++  ModalContentContainer,
++  LabelItem,
++  LabelText,
++  ContentHolder,
++} from './style';
++import Button from '../../../../components/Button/index';
++import ActionBar from '../../containers/ActionBar';
++import { Touchable } from '../../../../shared/styles';
++
++const LabelsMenuCmp = ({
++  onModalClose,
++}) => (
++  <ModalWrapper>
++    <ContentHolder>
++      <Touchable
++        onPress={() => onModalClose()}
++        styles={{ flex: 1 }}
++      >
++        <ModalBackground />
++      </Touchable>
++      <ModalContentContainer>
++        <LabelItem>
++          <LabelText>
++            Incomming
++          </LabelText>
++        </LabelItem>
++        <LabelItem>
++          <LabelText>
++            Outgoing
++          </LabelText>
++        </LabelItem>
++        <LabelItem>
++          <LabelText>
++            Label
++          </LabelText>
++        </LabelItem>
++        <LabelItem>
++          <LabelText>
++            CBS Executives
++          </LabelText>
++        </LabelItem>
++        <Button
++          label={'ADD LABEL'}
++          style={{ marginVertical: 15, marginHorizontal: 10, }}
++        />
++      </ModalContentContainer>
++      <ActionBar />
++    </ContentHolder>
++  </ModalWrapper>
++);
++
++export default LabelsMenuCmp;
+Index: src/components/Icon/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Icon/index.js	(revision )
++++ src/components/Icon/index.js	(revision )
+@@ -0,0 +1,70 @@
++import React from 'react';
++import PropTypes from 'prop-types';
++import { View, Image } from 'react-native';
++import searchIcon from '../../assets/images/icons/search.png';
++import logoIcon from '../../assets/images/icons/logo.png';
++import menuIcon from '../../assets/images/icons/menuIcon.png';
++import checkedIcon from '../../assets/images/icons/checked.png';
++
++const icons = {
++  search: {
++    source: searchIcon,
++    width: 20,
++    height: 20,
++  },
++  logo: {
++    source: logoIcon,
++    width: 20,
++    height: 24,
++  },
++  humburgerMenu: {
++    source: menuIcon,
++    width: 24,
++    height: 14,
++  },
++  checked: {
++    source: checkedIcon,
++    width: 16,
++    height: 15,
++  },
++};
++
++const Icon = props => {
++  const { name } = props;
++
++  const ratio = props.ratio ? props.ratio : 1;
++  const width = props.width
++    ? Math.ceil(props.width * ratio)
++    : Math.ceil(icons[name].width * ratio);
++  const height = props.height
++    ? Math.ceil(props.height * ratio)
++    : Math.ceil(icons[name].height * ratio);
++
++  return (
++    <View {...props.style}>
++      <Image
++        source={icons[name].source}
++        style={{
++          width,
++          height,
++        }}
++      />
++    </View>
++  );
++};
++
++Icon.propTypes = {
++  width: PropTypes.number,
++  height: PropTypes.number,
++  style: PropTypes.object,
++  ratio: PropTypes.number,
++};
++
++Icon.defaultProps = {
++  width: 0,
++  height: 0,
++  style: {},
++  ratio: 0,
++};
++
++export default Icon;
+Index: src/modules/phoneLogs/components/UserSelect/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/modules/phoneLogs/components/UserSelect/index.js	(revision )
++++ src/modules/phoneLogs/components/UserSelect/index.js	(revision )
+@@ -0,0 +1,30 @@
++import React from 'react';
++import { View } from 'react-native';
++import { Scrollable, Container } from '../../../../shared/styles';
++import ActionBar from '../../containers/ActionBar';
++import {
++  Title,
++  SubTitle,
++  TitleSection,
++} from './style';
++
++const SUBTITLE = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A debitis deserunt dolorem doloribus fugit hic iste iusto quidem.';
++
++const UserSelectCmp = ({
++  renderUsers,
++}) => (
++  <View style={{ flex: 1, backgroundColor: '#282A2D' }}>
++    <Container>
++      <Scrollable>
++        <TitleSection>
++          <Title>Switch Phonelogs</Title>
++          <SubTitle>{SUBTITLE}</SubTitle>
++        </TitleSection>
++        {renderUsers()}
++      </Scrollable>
++    </Container>
++    <ActionBar />
++  </View>
++);
++
++export default UserSelectCmp;
+Index: src/modules/phoneLogs/components/UserSelect/style.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/modules/phoneLogs/components/UserSelect/style.js	(revision )
++++ src/modules/phoneLogs/components/UserSelect/style.js	(revision )
+@@ -0,0 +1,19 @@
++import styled from 'styled-components/native';
++
++export const Title = styled.Text`
++  font-size: 13;
++  color: #000;
++`;
++
++export const SubTitle = styled.Text`
++  margin-top: 5;
++  font-size: 11;
++  color: #444;
++`;
++
++export const TitleSection = styled.View`
++  padding-vertical: 20;
++  padding-horizontal: 20;
++  border-bottom-width: 1;
++  border-bottom-color: #eee;
++`;
+Index: src/modules/phoneLogs/components/LabelsMenu/style.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/modules/phoneLogs/components/LabelsMenu/style.js	(revision )
++++ src/modules/phoneLogs/components/LabelsMenu/style.js	(revision )
+@@ -0,0 +1,41 @@
++import styled from 'styled-components/native';
++import layout, { actionBarHeight } from '../../../../constants/layout';
++
++export const ModalWrapper = styled.View`
++  flex: 1;
++  position: relative;
++`;
++
++export const ModalBackground = styled.View`
++  flex: 1;
++  backgroundColor: #000;
++  opacity: 0.7; 
++`;
++
++export const ContentHolder = styled.View`
++  flex: 1;
++`;
++
++export const ModalContentContainer = styled.ScrollView`
++  position: absolute;
++  bottom: ${actionBarHeight};
++  left: 0;
++  width: 100%;
++  border-radius: 10;
++  padding-vertical: 10;  
++  background-color: #fff;
++`;
++
++export const LabelItem = styled.View`
++  flex-direction: row;
++  justify-content: space-between;
++  border-bottom-width: 1;
++  border-bottom-color: #eee;
++  padding-vertical: 10;
++  padding-horizontal: 10;
++`;
++
++export const LabelText = styled.Text`
++  color: #000;
++  font-size: 15;
++`;
+Index: src/shared/styles.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/shared/styles.js	(revision )
++++ src/shared/styles.js	(revision )
+@@ -0,0 +1,18 @@
++import styled from 'styled-components/native';
++import layout from '../constants/layout';
++
++export const Scrollable = styled.ScrollView`
++  flex: 1;
++`;
++
++export const Touchable = layout.os === 'android'
++  ? styled.TouchableNativeFeedback`
++    `
++  : styled.TouchableWithoutFeedback`
++    `;
++
++export const Container = styled.View`
++  flex: 1;
++  border-radius: 10;
++  background-color: #fff;
++`;
+Index: src/components/UserThumb/style.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/UserThumb/style.js	(revision )
++++ src/components/UserThumb/style.js	(revision )
+@@ -0,0 +1,13 @@
++import styled from 'styled-components/native';
++
++export const ThumbContainer = styled.View`
++
++`;
++
++export const UserPic = styled.Image`
++  height: 40;
++  width: 40;
++  border-radius: 40;
++  border-color: #000;
++  border-width: 1;
++`;
+Index: src/components/UserThumb/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/UserThumb/index.js	(revision )
++++ src/components/UserThumb/index.js	(revision )
+@@ -0,0 +1,16 @@
++import React from 'react';
++import {
++  UserPic,
++  ThumbContainer,
++} from './style';
++import person from '../../assets/images/person.jpg';
++
++const UserThumb = () => (
++  <ThumbContainer>
++    <UserPic
++      source={person}
++    />
++  </ThumbContainer>
++);
++
++export default UserThumb;
+Index: src/modules/phoneLogs/components/UserSelect/User/style.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/modules/phoneLogs/components/UserSelect/User/style.js	(revision )
++++ src/modules/phoneLogs/components/UserSelect/User/style.js	(revision )
+@@ -0,0 +1,14 @@
++import styled from 'styled-components/native';
++
++export const UserContainer = styled.View`
++  flex-direction: row;
++  padding-vertical: 15;
++  padding-horizontal: 15;
++`;
++
++export const UserName = styled.Text`
++  color: #000;
++  font-size: 16;
++  margin-left: 15;
++  margin-top: 8;
++`;
+Index: src/modules/phoneLogs/containers/LabelsMenu.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/modules/phoneLogs/containers/LabelsMenu.js	(revision )
++++ src/modules/phoneLogs/containers/LabelsMenu.js	(revision )
+@@ -0,0 +1,20 @@
++import React, { Component } from 'react';
++import LabelsMenuCmp from '../components/LabelsMenu';
++import { HOME_ROUTE } from '../../../constants/routes';
++
++class LabelsMenu extends Component {
++
++  closeModal() {
++    this.props.navigation.navigate(HOME_ROUTE); // TODO: Handle in good way
++  }
++
++  render() {
++    return (
++      <LabelsMenuCmp
++        onModalClose={() => this.closeModal()}
++      />
++    );
++  }
++};
++
++export default LabelsMenu;
+Index: src/store/reducers/phonelogs.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/store/reducers/phonelogs.js	(date 1510682569000)
++++ src/store/reducers/phonelogs.js	(revision )
+@@ -3,6 +3,7 @@
+   FETCHING_DONE,
+   PENDING,
+   GET_PHONELOGS,
++  GET_USERS,
+ } from '../actionTypes/phonelogs';
+ 
+ const phonelogsList = (state = [], action) => {
+@@ -28,8 +29,23 @@
+   }
+ };
+ 
++const usersList = (state = [], action) => {
++  switch (action.type) {
++  case GET_USERS:
++    return action.payload;
++  case 'persist/REHYDRATE': {
++    if (action.payload.phonelogs.usersList) {
++      return action.payload.phonelogs.usersList;
++    }
++    return state;
++  }
++  default:
++    return state;
++  }
++};
+ 
+ export default combineReducers({
++  usersList,
+   phonelogsList,
+   isPendingPhoneLogs,
+ });
+Index: src/navigation/Navigator.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/navigation/Navigator.js	(date 1510682569000)
++++ src/navigation/Navigator.js	(revision )
+@@ -39,12 +39,12 @@
+ const Phonelogs = {
+   screen: StackNavigator(
+     {
+-      Home: {
+-        screen: PhonelogsList,
+-      },
+       UserSelect: {
+         screen: UserSelect,
+       },
++      Home: {
++        screen: PhonelogsList,
++      },
+       MainMenu: {
+         screen: MainMenu,
+       },
+Index: src/store/mockedData/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/store/mockedData/index.js	(date 1510682569000)
++++ src/store/mockedData/index.js	(revision )
+@@ -100,3 +100,30 @@
+     inform: true,
+   },
+ ];
++
++export const users = [
++  {
++    userName: 'Marcelle Quigley',
++  },
++  {
++    userName: 'Senior Pomador',
++  },
++  {
++    userName: 'Brandon Lays',
++  },
++  {
++    userName: 'Keeper of the Light',
++  },
++  {
++    userName: 'Brain Machine',
++  },
++  {
++    userName: 'Ivan Grozniy',
++  },
++  {
++    userName: 'Karl III',
++  },
++  {
++    userName: 'Big Bad Wolf',
++  },
++];
+Index: src/components/RadioBtn/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/RadioBtn/index.js	(date 1510682569000)
++++ src/components/RadioBtn/index.js	(revision )
+@@ -18,8 +18,9 @@
+   }
+ 
+   onCheck() {
+-    this.setState({ checked: !this.state.checked });
+-    this.props.onCheck();
++    this.setState({ checked: !this.state.checked }, () => {
++      this.props.onCheck();
++    });
+   }
+ 
+   renderByPriority(priority) {
+Index: src/store/actionTypes/phonelogs.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/store/actionTypes/phonelogs.js	(date 1510682569000)
++++ src/store/actionTypes/phonelogs.js	(revision )
+@@ -4,3 +4,4 @@
+ export const PENDING = `${namespace}/PENDING`;
+ export const FETCHING_DONE = `${namespace}/FETCHING_DONE`;
+ 
++export const GET_USERS = `${namespace}/REQUEST_USERS`;
+Index: src/store/actionCreators/phonelogsActions.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/store/actionCreators/phonelogsActions.js	(date 1510682569000)
++++ src/store/actionCreators/phonelogsActions.js	(revision )
+@@ -1,7 +1,8 @@
+ import {
+   GET_PHONELOGS,
++  GET_USERS,
+ } from '../actionTypes/phonelogs';
+-import { phonelogs } from '../mockedData';
++import { phonelogs, users } from '../mockedData';
+ 
+ export const getPhoneLogs = () => async dispatch => {
+   const response = await setTimeout(() => {
+@@ -10,3 +11,12 @@
+ 
+   return response;
+ };
++
++export const getUsersList = () => async dispatch => {
++  console.log('users', users);
++  const response = await setTimeout(() => {
++    dispatch({ type: GET_USERS, payload: users });
++  }, 2000);
++
++  return response;
++};

@@ -39,11 +39,11 @@ const stackOptions = {
 const Phonelogs = {
   screen: StackNavigator(
     {
-      Home: {
-        screen: PhonelogsList,
-      },
       UserSelect: {
         screen: UserSelect,
+      },
+      Home: {
+        screen: PhonelogsList,
       },
       MainMenu: {
         screen: MainMenu,

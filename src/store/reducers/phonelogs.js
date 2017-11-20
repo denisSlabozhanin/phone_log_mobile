@@ -3,6 +3,7 @@ import {
   FETCHING_DONE,
   PENDING,
   GET_PHONELOGS,
+  GET_USERS,
 } from '../actionTypes/phonelogs';
 
 const phonelogsList = (state = [], action) => {
@@ -28,8 +29,23 @@ const isPendingPhoneLogs = (state = false, action) => {
   }
 };
 
+const usersList = (state = [], action) => {
+  switch (action.type) {
+  case GET_USERS:
+    return action.payload;
+  case 'persist/REHYDRATE': {
+    if (action.payload.phonelogs.usersList) {
+      return action.payload.phonelogs.usersList;
+    }
+    return state;
+  }
+  default:
+    return state;
+  }
+};
 
 export default combineReducers({
+  usersList,
   phonelogsList,
   isPendingPhoneLogs,
 });
