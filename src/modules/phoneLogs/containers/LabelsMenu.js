@@ -9,8 +9,10 @@ class LabelsMenu extends Component {
   }
 
   render() {
+    const { navigation } = this.props;
     return (
       <LabelsMenuCmp
+        navigation = {navigation}
         onModalClose={() => this.closeModal()}
       />
     );

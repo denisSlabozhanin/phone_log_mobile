@@ -2,21 +2,26 @@ import React from 'react';
 import {
   Container,
   Status,
-  FiltersOpen,
   Touchable,
-  Select,
+  IconWrapper,
 } from './style';
+import Icon from '../../../../components/Icon';
 
 const ActionBarCmp = ({
   openFilters,
+  openEditList,
 }) => (
   <Container>
-    <Touchable>
-      <Select>Icon</Select>
+    <Touchable onOpress={() => openEditList()}>
+      <IconWrapper fromTop={11}>
+        <Icon name={'editList'} />
+      </IconWrapper>
     </Touchable>
     <Status>Updated Now</Status>
     <Touchable onPress={() => openFilters()}>
-      <FiltersOpen>Icon</FiltersOpen>
+      <IconWrapper fromTop={10}>
+        <Icon name={'addCallIcon'} />
+      </IconWrapper>
     </Touchable>
   </Container>
 );

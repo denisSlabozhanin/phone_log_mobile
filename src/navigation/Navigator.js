@@ -26,6 +26,7 @@ const tabOptions = {
   navigationOptions: {
     tabBarVisible: false,
   },
+  animationEnabled: false,
 };
 
 const stackOptions = {
@@ -34,16 +35,17 @@ const stackOptions = {
     backgroundColor: 'transparent',
     opacity: 1,
   },
+  animationEnabled: false,
 };
 
 const Phonelogs = {
   screen: StackNavigator(
     {
-      UserSelect: {
-        screen: UserSelect,
-      },
       Home: {
         screen: PhonelogsList,
+      },
+      UserSelect: {
+        screen: UserSelect,
       },
       MainMenu: {
         screen: MainMenu,
@@ -76,7 +78,6 @@ export default TabNavigator(
   {
     ...tabOptions,
     swipeEnabled: false,
-    animationEnabled: false,
     lazy: true,
   },
 );

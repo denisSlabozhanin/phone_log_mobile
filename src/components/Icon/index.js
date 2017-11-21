@@ -5,6 +5,8 @@ import searchIcon from '../../assets/images/icons/search.png';
 import logoIcon from '../../assets/images/icons/logo.png';
 import menuIcon from '../../assets/images/icons/menuIcon.png';
 import checkedIcon from '../../assets/images/icons/checked.png';
+import editList from '../../assets/images/icons/editListIcon.png';
+import addCallIcon from '../../assets/images/icons/addCallIcon.png';
 
 const icons = {
   search: {
@@ -26,6 +28,16 @@ const icons = {
     source: checkedIcon,
     width: 16,
     height: 15,
+  },
+  editList: {
+    source: editList,
+    width: 34,
+    height: 22,
+  },
+  addCallIcon: {
+    source: addCallIcon,
+    width: 27,
+    height: 23,
   },
 };
 

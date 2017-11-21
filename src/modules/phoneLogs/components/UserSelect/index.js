@@ -12,6 +12,7 @@ const SUBTITLE = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A de
 
 const UserSelectCmp = ({
   renderUsers,
+  navigation,
 }) => (
   <View style={{ flex: 1, backgroundColor: '#282A2D' }}>
     <Container>
@@ -23,7 +24,9 @@ const UserSelectCmp = ({
         {renderUsers()}
       </Scrollable>
     </Container>
-    <ActionBar />
+    <ActionBar
+      navigation={navigation}
+    />
   </View>
 );
 

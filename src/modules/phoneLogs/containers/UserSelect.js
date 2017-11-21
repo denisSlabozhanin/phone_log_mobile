@@ -6,24 +6,19 @@ import UserSelectCmp from '../components/UserSelect';
 import User from '../components/UserSelect/User';
 import RadioBtn from '../../../components/RadioBtn';
 import EmptyList from '../components/PhonelogsList/EmptyList';
+import Preloader from '../../../components/Preloader/index';
 
 class UserSelect extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [],
+    };
+  }
+
   componentWillMount() {
     if (this.props.usersList.length === 0) {
       this.props.getUsersList();
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.usersList.length !== this.props.usersList.length) {
-      const users = nextProps.usersList.map(user => ({
-        ...user,
-        selected: false,
-      }));
-
-      this.setState({
-        users,
-      });
     }
   }
 
@@ -47,26 +42,35 @@ class UserSelect extends Component {
 
   renderUsers() {
     const { usersList } = this.props;
-    return usersList.map((user, index) => (
-      <RadioBtn
-        key={index}
-        labelCmp={this.renderUser(user)}
-        priority={'label radio'}
-        checked={this.state.users[index].selected}
-        onCheck={() => this.onUserSelect(user)}
-        radioStyles={{ marginTop: 27, marginRight: 20 }}
-        style={{ borderBottomWidth: 1, borderBottomColor: '#eee' }}
-      />
-    ));
+    return this.state.users.length > 0
+      ? usersList.map((user, index) => (
+        <RadioBtn
+          key={index}
+          labelCmp={this.renderUser(user)}
+          priority={'label radio'}
+          checked={this.state.users[index].selected}
+          onCheck={() => this.onUserSelect(user)}
+          radioStyles={{ marginTop: 27, marginRight: 20 }}
+          style={{ borderBottomWidth: 1, borderBottomColor: '#eee' }}
+        />
+      ))
+      : (
+        <Preloader />
+      );
   }
 
   render() {
-    return this.props.usersList.length === 0
+    const {
+      navigation,
+      usersList,
+    } = this.props;
+    return usersList.length === 0
       ? (
         <EmptyList />
       )
       : (
         <UserSelectCmp
+          navigation={navigation}
           renderUsers={() => this.renderUsers()}
         />
       );

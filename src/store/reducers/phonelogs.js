@@ -34,7 +34,7 @@ const usersList = (state = [], action) => {
   case GET_USERS:
     return action.payload;
   case 'persist/REHYDRATE': {
-    if (action.payload.phonelogs.usersList) {
+    if (action.payload && action.payload.phonelogs && action.payload.phonelogs.usersList) {
       return action.payload.phonelogs.usersList;
     }
     return state;

@@ -13,6 +13,7 @@ import { Touchable } from '../../../../shared/styles';
 
 const LabelsMenuCmp = ({
   onModalClose,
+  navigation,
 }) => (
   <ModalWrapper>
     <ContentHolder>
@@ -48,7 +49,9 @@ const LabelsMenuCmp = ({
           style={{ marginVertical: 15, marginHorizontal: 10, }}
         />
       </ModalContentContainer>
-      <ActionBar />
+      <ActionBar
+        navigation={navigation}
+      />
     </ContentHolder>
   </ModalWrapper>
 );

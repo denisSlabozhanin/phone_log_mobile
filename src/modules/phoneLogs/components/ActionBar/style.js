@@ -33,3 +33,8 @@ export const FiltersOpen = styled.Text`
   font-size: 12;
   padding-top: 12;
 `;
+
+export const IconWrapper = styled.View`
+  padding-top: ${({ fromTop }) => fromTop};
+  padding-horizontal: 15;
+`;
