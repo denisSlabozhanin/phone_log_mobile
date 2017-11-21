@@ -26,6 +26,7 @@ const tabOptions = {
   navigationOptions: {
     tabBarVisible: false,
   },
+  animationEnabled: false,
 };
 
 const stackOptions = {
@@ -34,6 +35,7 @@ const stackOptions = {
     backgroundColor: 'transparent',
     opacity: 1,
   },
+  animationEnabled: false,
 };
 
 const Phonelogs = {
@@ -76,7 +78,6 @@ export default TabNavigator(
   {
     ...tabOptions,
     swipeEnabled: false,
-    animationEnabled: false,
     lazy: true,
   },
 );

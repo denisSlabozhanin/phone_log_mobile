@@ -41,6 +41,7 @@ class PhonelogsList extends Component {
       )
       : (
         <Phonelogs
+          navigation={this.props.navigation}
           renderPhonelogs={() => this.renderPhonelogs()}
         />
       );
@@ -48,6 +49,7 @@ class PhonelogsList extends Component {
 }
 
 PhonelogsList.propTypes = {
+  navigation: PropTypes.object.isRequired,
   phonelogs: PropTypes.array.isRequired,
   getPhoneLogs: PropTypes.func.isRequired,
 };

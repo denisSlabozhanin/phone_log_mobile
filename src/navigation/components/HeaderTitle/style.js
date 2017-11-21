@@ -6,6 +6,7 @@ export const TitleContainer = styled.View`
 `;
 
 export const TitleText = styled.Text`
+  font-family:
   font-size: 16;
 `;
 

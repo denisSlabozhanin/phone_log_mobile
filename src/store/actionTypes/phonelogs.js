@@ -4,3 +4,6 @@ export const GET_PHONELOGS = `${namespace}/GET_PHONELOGS`;
 export const PENDING = `${namespace}/PENDING`;
 export const FETCHING_DONE = `${namespace}/FETCHING_DONE`;
 
+export const GET_USERS = `${namespace}/REQUEST_USERS`;
+
+export const PHONELOGS_EDIT_MODE = `${namespace}/PHONELOGS_EDIT_MODE`;

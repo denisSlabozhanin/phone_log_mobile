@@ -8,18 +8,22 @@ import ActionBar from '../../containers/ActionBar';
 
 class Phonelogs extends Component {
   render() {
+    const { navigation } = this.props;
     return (
       <Container>
         <PhonelogsContainer>
           {this.props.renderPhonelogs()}
         </PhonelogsContainer>
-        <ActionBar />
+        <ActionBar
+          navigation={navigation}
+        />
       </Container>
     );
   }
 }
 
 Phonelogs.propTypes = {
+  navigation: PropTypes.object.isRequired,
   renderPhonelogs: PropTypes.func.isRequired,
 };
 

@@ -30,6 +30,7 @@ export const Heading = styled.View`
 `;
 
 export const Notes = styled.Text`
+  font-family: Yantramanav-Regular
   flex: 1;
   font-size: 12;
   margin-top: 5;

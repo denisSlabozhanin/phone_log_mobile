@@ -18,8 +18,9 @@ class RadioBtn extends Component {
   }
 
   onCheck() {
-    this.setState({ checked: !this.state.checked });
-    this.props.onCheck();
+    this.setState({ checked: !this.state.checked }, () => {
+      this.props.onCheck();
+    });
   }
 
   renderByPriority(priority) {

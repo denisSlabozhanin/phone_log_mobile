@@ -100,3 +100,30 @@ export const phonelogs = [
     inform: true,
   },
 ];
+
+export const users = [
+  {
+    userName: 'Marcelle Quigley',
+  },
+  {
+    userName: 'Senior Pomador',
+  },
+  {
+    userName: 'Brandon Lays',
+  },
+  {
+    userName: 'Keeper of the Light',
+  },
+  {
+    userName: 'Brain Machine',
+  },
+  {
+    userName: 'Ivan Grozniy',
+  },
+  {
+    userName: 'Karl III',
+  },
+  {
+    userName: 'Big Bad Wolf',
+  },
+];
