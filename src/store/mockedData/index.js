@@ -1,6 +1,7 @@
 
 export const phonelogs = [
   {
+    id: 1,
     contactName: 'Sam Cookes',
     callTime: '8:45pm',
     notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur ducimus.',
@@ -10,6 +11,7 @@ export const phonelogs = [
     inform: true,
   },
   {
+    id: 2,
     contactName: 'Brandon Kells',
     callTime: 'Yesterday',
     notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur ducimus exercitationem.',
@@ -19,6 +21,7 @@ export const phonelogs = [
     inform: true,
   },
   {
+    id: 3,
     contactName: 'Joanie Funk',
     callTime: 'Yesterday',
     notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur ducimus.',
@@ -28,6 +31,7 @@ export const phonelogs = [
     inform: true,
   },
   {
+    id: 4,
     contactName: 'Leonardo Nightly',
     callTime: 'Mar 28',
     notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur ducimus exercitationem repellat.',
@@ -37,6 +41,7 @@ export const phonelogs = [
     inform: true,
   },
   {
+    id: 5,
     contactName: 'Sam Cookes',
     callTime: 'Mar 28',
     notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur ducimus exercitationem repellat.',
@@ -46,6 +51,7 @@ export const phonelogs = [
     inform: true,
   },
   {
+    id: 6,
     contactName: 'Joanie Funk',
     callTime: 'Mar 25',
     notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur ducimus exercitationem facilis fuga iure laboriosam maxime minima nemo porro repellat.',
@@ -55,6 +61,7 @@ export const phonelogs = [
     inform: true,
   },
   {
+    id: 7,
     contactName: 'Joanie Funk',
     callTime: 'Mar 25',
     notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur ducimus exercitationem facilis fuga iure laboriosam maxime minima nemo porro repellat.',
@@ -64,6 +71,7 @@ export const phonelogs = [
     inform: true,
   },
   {
+    id: 8,
     contactName: 'Leonardo Nightly',
     callTime: 'Mar 28',
     notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur ducimus exercitationem repellat.',
@@ -73,6 +81,7 @@ export const phonelogs = [
     inform: true,
   },
   {
+    id: 9,
     contactName: 'Leonardo Nightly',
     callTime: 'Mar 28',
     notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
@@ -82,6 +91,7 @@ export const phonelogs = [
     inform: true,
   },
   {
+    id: 10,
     contactName: 'Sam Cookes',
     callTime: '8:45pm',
     notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur ducimus.',
@@ -91,6 +101,7 @@ export const phonelogs = [
     inform: true,
   },
   {
+    id: 11,
     contactName: 'Brandon Kells',
     callTime: 'Yesterday',
     notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur ducimus exercitationem.',

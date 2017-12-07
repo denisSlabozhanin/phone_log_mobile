@@ -26,18 +26,18 @@ const icons = {
   },
   checked: {
     source: checkedIcon,
-    width: 16,
-    height: 15,
+    width: 9,
+    height: 8,
   },
   editList: {
     source: editList,
-    width: 34,
-    height: 22,
+    width: 29,
+    height: 19,
   },
   addCallIcon: {
     source: addCallIcon,
-    width: 27,
-    height: 23,
+    width: 23,
+    height: 19,
   },
 };
 

@@ -30,8 +30,8 @@ RootNavigator.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  nav: state.nav,
+const mapStateToProps = ({ nav }) => ({
+  nav,
 });
 
 export default connect(mapStateToProps)(RootNavigator);

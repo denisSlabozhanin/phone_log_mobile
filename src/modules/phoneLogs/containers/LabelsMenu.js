@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
 import LabelsMenuCmp from '../components/LabelsMenu';
-import { HOME_ROUTE } from '../../../constants/routes';
 
 class LabelsMenu extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpened: this.props.isOpened || false,
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ isOpened: nextProps.isOpened });
+  }
 
   closeModal() {
-    this.props.navigation.navigate(HOME_ROUTE); // TODO: Handle in good way
+    this.setState({ isOpened: false });
   }
 
   render() {
-    const { navigation } = this.props;
     return (
       <LabelsMenuCmp
-        navigation = {navigation}
+        isOpened={this.state.isOpened}
         onModalClose={() => this.closeModal()}
       />
     );

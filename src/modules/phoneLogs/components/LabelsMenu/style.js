@@ -1,15 +1,21 @@
 import styled from 'styled-components/native';
+import { Dimensions } from 'react-native';
 import layout, { actionBarHeight } from '../../../../constants/layout';
 
+const { width, height } = Dimensions.get('window');
+
 export const ModalWrapper = styled.View`
-  flex: 1;
+  display: ${({ isOpened }) => isOpened ? 'flex' : 'none'};
   position: relative;
+  height: ${height};
+  width: ${width};
+  flex: 1;
 `;
 
 export const ModalBackground = styled.View`
   flex: 1;
   backgroundColor: #000;
-  opacity: 0.7; 
+  opacity: 0.7;
 `;
 
 export const ContentHolder = styled.View`
@@ -17,10 +23,8 @@ export const ContentHolder = styled.View`
 `;
 
 export const ModalContentContainer = styled.ScrollView`
-  position: absolute;
-  bottom: ${actionBarHeight};
-  left: 0;
-  width: 100%;
+  margin-top: auto;
+  width: ${width};
   border-radius: 10;
   padding-vertical: 10;  
   background-color: #fff;

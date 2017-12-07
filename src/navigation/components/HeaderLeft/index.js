@@ -6,12 +6,17 @@ import { Touchable } from '../../../shared/styles';
 import { Padded } from './style';
 
 const navigate = (navigation) => {
-  const currentRouteIndex = navigation.state.routes.length - 1;
+/*  const currentRouteIndex = navigation.state.routes.length - 1;
   const currentRoute = navigation.state.routes[currentRouteIndex];
   if (currentRoute.routeName !== MAIN_MENU_ROUTE) {
     navigation.navigate(MAIN_MENU_ROUTE);
   } else {
     navigation.navigate(navigation.state.routes[currentRouteIndex - 1].routeName);
+  }*/
+  if (navigation.state.routeName !== MAIN_MENU_ROUTE) {
+    navigation.navigate(MAIN_MENU_ROUTE);
+  } else {
+    navigation.goBack();
   }
 };
 

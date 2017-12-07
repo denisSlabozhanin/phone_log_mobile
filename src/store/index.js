@@ -3,6 +3,7 @@ import { AsyncStorage } from 'react-native';
 import { reducer as form } from 'redux-form';
 import prepareStore from './prepareStore';
 import nav from '../navigation/reducer';
+import app from './reducers/appReducer';
 import phonelogs from './reducers/phonelogs';
 
 const ReduxPersist = {
@@ -10,7 +11,7 @@ const ReduxPersist = {
   reducerVersion: '6',
   storeConfig: {
     storage: AsyncStorage,
-    whitelist: ['nav', 'form', 'phonelogs'],
+    whitelist: ['nav', 'form', 'phonelogs', 'app'],
   },
 };
 
@@ -18,6 +19,7 @@ const store = prepareStore({
   nav,
   form,
   phonelogs,
+  app,
   autoRehydrate,
 });
 

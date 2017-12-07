@@ -3,7 +3,7 @@ import layout, { actionBarHeight } from '../../../../constants/layout';
 
 export const Container = styled.View`
   height: ${actionBarHeight};
-  background-color: #282A2D;
+  background-color: #242529;
   flex-direction: row;
   justify-content: space-between;
 `;

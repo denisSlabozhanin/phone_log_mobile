@@ -6,7 +6,7 @@ export default {
   },
   defaultFontColor: '#fff',
   logoFontFamily: 'HelveticaNeue-CondensedBlack',
-  screensBackgroundColor: '#222426',
+  screensBackgroundColor: '#242529',
   form: {
     input: {
       placeholderTextColor: '#9a9a9a',
@@ -19,7 +19,8 @@ export default {
   },
   defaultHeader: {
     style: {
-      backgroundColor: '#282A2D',
+      backgroundColor: '#242529',
+      height: 50,
     },
     title: {
       color: '#ffffff',
@@ -27,5 +28,5 @@ export default {
     },
   },
   preloaderAnimationColor: '#000',
-  contrastBackgroundColor: '#232830',
+  contrastBackgroundColor: '#242529',
 };

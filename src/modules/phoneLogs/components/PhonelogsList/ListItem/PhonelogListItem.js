@@ -13,7 +13,10 @@ import {
   PhoneNumber,
   IndicatorsBar,
   PhonelogContainer,
+  CheckBoxWrapper,
 } from './style';
+import CheckBox from '../../../../../components/CheckBox';
+import { Touchable } from '../../../../../shared/styles';
 
 const PhonelogsListItem = ({
   contactName,
@@ -23,24 +26,37 @@ const PhonelogsListItem = ({
   inform,
   phoneNumber,
   callTime,
+  isEditMode,
 }) => (
-  <PhonelogContainer>
-    <IndicatorsBar>
-      <Urgent style={{ display: urgent ? 'flex' : 'none' }} />
-      <Inform style={{ display: inform ? 'flex' : 'none' }} />
-    </IndicatorsBar>
-    <Content>
-      <Heading>
-        <ContactName>{contactName}</ContactName>
-        <CallTime>{callTime}</CallTime>
-      </Heading>
-      <Notes>{notes}</Notes>
-      <Footer>
-        <PhoneNumber>{phoneNumber}</PhoneNumber>
-        <CallStatus>{callStatus}</CallStatus>
-      </Footer>
-    </Content>
-  </PhonelogContainer>
+  <Touchable onPress={() => {}}>
+    <PhonelogContainer>
+      {isEditMode
+        ?
+        <CheckBoxWrapper>
+          <CheckBox
+            checked={false}
+            onCheck={() => {}}
+          />
+        </CheckBoxWrapper>
+        :
+        <IndicatorsBar>
+          {urgent && <Urgent />}
+          {inform && <Inform />}
+        </IndicatorsBar>
+      }
+      <Content>
+        <Heading>
+          <ContactName>{contactName}</ContactName>
+          <CallTime>{callTime}</CallTime>
+        </Heading>
+        <Notes>{notes}</Notes>
+        <Footer>
+          <PhoneNumber>{phoneNumber}</PhoneNumber>
+          <CallStatus>{callStatus}</CallStatus>
+        </Footer>
+      </Content>
+    </PhonelogContainer>
+  </Touchable>
 );
 
 PhonelogsListItem.propTypes = {

@@ -1,20 +1,13 @@
 import styled from 'styled-components/native';
 import layout from '../../constants/layout';
 
-export const Touchable = layout.os === 'android'
-  ? styled.TouchableNativeFeedback`
-      
-    `
-  : styled.TouchableWithoutFeedback`
-    `;
-
 export const OuterBox = styled.View`
-  height: 19;
-  width: 19;
+  height: 17;
+  width: 17;
   padding-vertical: 4;
-  padding-horizontal: 4;
-  border-width: 1;
-  border-color: #95989A;
+  padding-horizontal: 3;
+  border-width: 0.5;
+  border-color: #444;
   border-radius: 3;
   overflow: hidden;
 `;

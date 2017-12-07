@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { REHYDRATE } from 'redux-persist/constants';
 import {
   FETCHING_DONE,
   PENDING,
@@ -10,6 +11,12 @@ const phonelogsList = (state = [], action) => {
   switch (action.type) {
   case GET_PHONELOGS:
     return action.payload;
+  case REHYDRATE: {
+    if (action.payload && action.payload.phonelogs && action.payload.phonelogs.phonelogsList) {
+      return action.payload.phonelogs.phonelogsList;
+    }
+    return state;
+  }
   case 'persist/REHYDRATE': {
     return action.payload.phonelogs.phonelogsList;
   }

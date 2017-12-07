@@ -5,11 +5,8 @@ export const Scrollable = styled.ScrollView`
   flex: 1;
 `;
 
-export const Touchable = layout.os === 'android'
-  ? styled.TouchableNativeFeedback`
-    `
-  : styled.TouchableWithoutFeedback`
-    `;
+export const Touchable = styled.TouchableWithoutFeedback`
+`;
 
 export const Container = styled.View`
   flex: 1;

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Touchable,
   OuterBox,
   Label,
   ContentHolder,
 } from './style';
+import Icon from '../Icon';
+import { Touchable } from '../../shared/styles';
 
 class CheckBox extends Component {
   constructor(props) {
@@ -17,8 +18,11 @@ class CheckBox extends Component {
   }
 
   onCheck() {
-    this.setState({ checked: !this.state.checked });
-    this.props.onCheck();
+    this.setState({
+      checked: !this.state.checked,
+    }, () => {
+      this.props.onCheck(this.state.checked);
+    });
   }
 
   render() {

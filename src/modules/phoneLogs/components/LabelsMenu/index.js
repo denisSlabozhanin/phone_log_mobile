@@ -8,14 +8,13 @@ import {
   ContentHolder,
 } from './style';
 import Button from '../../../../components/Button/index';
-import ActionBar from '../../containers/ActionBar';
 import { Touchable } from '../../../../shared/styles';
 
 const LabelsMenuCmp = ({
   onModalClose,
-  navigation,
+  isOpened,
 }) => (
-  <ModalWrapper>
+  <ModalWrapper show={isOpened}>
     <ContentHolder>
       <Touchable
         onPress={() => onModalClose()}
@@ -49,9 +48,6 @@ const LabelsMenuCmp = ({
           style={{ marginVertical: 15, marginHorizontal: 10, }}
         />
       </ModalContentContainer>
-      <ActionBar
-        navigation={navigation}
-      />
     </ContentHolder>
   </ModalWrapper>
 );

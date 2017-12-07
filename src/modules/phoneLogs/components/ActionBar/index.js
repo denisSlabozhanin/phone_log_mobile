@@ -9,10 +9,10 @@ import Icon from '../../../../components/Icon';
 
 const ActionBarCmp = ({
   openFilters,
-  openEditList,
+  editList,
 }) => (
   <Container>
-    <Touchable onOpress={() => openEditList()}>
+    <Touchable onPress={() => editList()}>
       <IconWrapper fromTop={11}>
         <Icon name={'editList'} />
       </IconWrapper>

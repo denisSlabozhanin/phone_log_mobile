@@ -4,7 +4,8 @@ export const PhonelogContainer = styled.View`
   flex: 1;
   flex-direction: row;
   padding-vertical: 10;
-  padding-horizontal: 20;
+  margin-horizontal: 10;
+  padding-horizontal: 10;
   border-bottom-color: #eee;
   border-bottom-width: 1;
 `;
@@ -71,4 +72,9 @@ export const ContactName = styled.Text`
 export const PhoneNumber = styled.Text`
   font-size: 11;
   color: #000;
+`;
+
+export const CheckBoxWrapper = styled.View`
+  margin-right: 15;
+  margin-top: 4;
 `;
